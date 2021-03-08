@@ -26,6 +26,21 @@ namespace CMIClinicAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Risks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RiskTitle = table.Column<string>(type: "TEXT", nullable: true),
+                    Limit = table.Column<int>(type: "INTEGER", nullable: false),
+                    AlgorithType = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Risks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -42,6 +57,31 @@ namespace CMIClinicAPI.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "SubRisks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RiskTitle = table.Column<string>(type: "TEXT", nullable: true),
+                    RiskId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubRisks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SubRisks_Risks_RiskId",
+                        column: x => x.RiskId,
+                        principalTable: "Risks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubRisks_RiskId",
+                table: "SubRisks",
+                column: "RiskId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -50,7 +90,13 @@ namespace CMIClinicAPI.Migrations
                 name: "Persons");
 
             migrationBuilder.DropTable(
+                name: "SubRisks");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Risks");
         }
     }
 }

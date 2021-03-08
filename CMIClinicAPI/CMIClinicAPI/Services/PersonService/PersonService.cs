@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using CMIClinicAPI.Dtos;
 using CMIClinicAPI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CMIClinicAPI.Services.PersonService
@@ -18,6 +20,8 @@ namespace CMIClinicAPI.Services.PersonService
         private readonly IMapper _mapper;
 
         private readonly DataContext _context;
+
+
         public PersonService(IMapper mapper, DataContext context)
         {
             _context = context;

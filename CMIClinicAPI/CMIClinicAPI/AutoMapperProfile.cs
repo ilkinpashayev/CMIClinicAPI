@@ -16,7 +16,14 @@ namespace CMIClinicAPI
             CreateMap<AddPersonDto, Person>();
             CreateMap<User, GetUserDto>();
             CreateMap<UserRegisterDto, User>();
+            CreateMap<Risk, GetRiskDto>();
+            CreateMap<AddRiskDto, Risk>();
 
+            CreateMap<SubRisk, GetSubRiskDto>();
+            CreateMap<AddSubRiskDto, SubRisk>();
+
+            CreateMap<Policy, GetPolicyDto>();
+            CreateMap<AddPolicyDto, Policy>();
         }
     }
 }

@@ -17,6 +17,9 @@ namespace CMIClinicAPI
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Risk> Risks { get; set; }
+        public DbSet<SubRisk> SubRisks { get; set; }
+        public DbSet<Policy> Policies { get; set; }
 
     }
 }

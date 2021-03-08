@@ -14,5 +14,7 @@ namespace CMIClinicAPI.Models
         public string IdSeries { get; set; } = "AA";
         public string IdNumber { get; set; } = "140232";
         public string PIN { get; set; } = "13RDPT2";
+        public List<Policy> Policies { get; set; }
+
     }
 }

@@ -1,8 +1,12 @@
 using CMIClinicAPI.Data;
 using CMIClinicAPI.Services.PersonService;
+using CMIClinicAPI.Services.PolicyService;
+using CMIClinicAPI.Services.RiskService;
+using CMIClinicAPI.Services.SubRiskService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +48,12 @@ namespace CMIClinicAPI
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IRiskService, RiskService>();
+            services.AddScoped<ISubRiskService, SubRiskService>();
+            services.AddScoped<IPolicyService, PolicyService>();
+
+
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -56,6 +66,9 @@ namespace CMIClinicAPI
                     ValidateAudience = false
                 };
             });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
         }
 

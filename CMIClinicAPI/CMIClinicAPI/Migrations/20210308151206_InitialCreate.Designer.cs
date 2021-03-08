@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMIClinicAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210308072520_InitialCreate")]
+    [Migration("20210308151206_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,45 @@ namespace CMIClinicAPI.Migrations
                     b.ToTable("Persons");
                 });
 
+            modelBuilder.Entity("CMIClinicAPI.Models.Risk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AlgorithType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Limit")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("RiskTitle")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Risks");
+                });
+
+            modelBuilder.Entity("CMIClinicAPI.Models.SubRisk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RiskId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("RiskTitle")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RiskId");
+
+                    b.ToTable("SubRisks");
+                });
+
             modelBuilder.Entity("CMIClinicAPI.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -74,6 +113,22 @@ namespace CMIClinicAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CMIClinicAPI.Models.SubRisk", b =>
+                {
+                    b.HasOne("CMIClinicAPI.Models.Risk", "Risk")
+                        .WithMany("SubRisks")
+                        .HasForeignKey("RiskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Risk");
+                });
+
+            modelBuilder.Entity("CMIClinicAPI.Models.Risk", b =>
+                {
+                    b.Navigation("SubRisks");
                 });
 #pragma warning restore 612, 618
         }
