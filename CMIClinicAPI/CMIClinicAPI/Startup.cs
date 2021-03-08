@@ -1,4 +1,5 @@
 using CMIClinicAPI.Data;
+using CMIClinicAPI.Services.ClaimService;
 using CMIClinicAPI.Services.PersonService;
 using CMIClinicAPI.Services.PolicyService;
 using CMIClinicAPI.Services.RiskService;
@@ -51,6 +52,8 @@ namespace CMIClinicAPI
             services.AddScoped<IRiskService, RiskService>();
             services.AddScoped<ISubRiskService, SubRiskService>();
             services.AddScoped<IPolicyService, PolicyService>();
+            services.AddScoped<IClaimService, ClaimService>();
+
 
 
 
