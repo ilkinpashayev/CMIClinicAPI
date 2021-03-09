@@ -18,6 +18,8 @@ namespace CMIClinicAPI.Models
         public int RiskId { get; set; }
 
 
+
+
     }
- }
+}
 

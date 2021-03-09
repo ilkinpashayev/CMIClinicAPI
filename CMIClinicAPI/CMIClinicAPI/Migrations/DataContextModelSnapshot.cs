@@ -16,6 +16,26 @@ namespace CMIClinicAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.3");
 
+            modelBuilder.Entity("CMIClinicAPI.Models.MedicalClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ClaimDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LimitUsed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PolicyNumber")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalClaims");
+                });
+
             modelBuilder.Entity("CMIClinicAPI.Models.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -78,8 +98,6 @@ namespace CMIClinicAPI.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("PersonId");
-
-                    b.HasIndex("RiskId");
 
                     b.ToTable("Policies");
                 });
@@ -159,12 +177,6 @@ namespace CMIClinicAPI.Migrations
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CMIClinicAPI.Models.Risk", null)
-                        .WithMany("Policies")
-                        .HasForeignKey("RiskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CMIClinicAPI.Models.SubRisk", b =>
@@ -185,8 +197,6 @@ namespace CMIClinicAPI.Migrations
 
             modelBuilder.Entity("CMIClinicAPI.Models.Risk", b =>
                 {
-                    b.Navigation("Policies");
-
                     b.Navigation("SubRisks");
                 });
 #pragma warning restore 612, 618

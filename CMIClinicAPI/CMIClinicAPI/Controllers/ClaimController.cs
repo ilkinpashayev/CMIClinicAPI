@@ -1,4 +1,5 @@
 ﻿
+using CMIClinicAPI.Dtos;
 using CMIClinicAPI.Services.ClaimService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,10 @@ namespace CMIClinicAPI.Controllers
         {
             return Ok(await _claimService.SearchPerson(PIN));
         }
-
+        [HttpPost]
+        public async Task<IActionResult> CreateClaim(AddMedicalClaimDto medicalClaimDto)
+        {
+            return Ok(await _claimService.AddMedicalClaim(medicalClaimDto));
+        }
     }
 }

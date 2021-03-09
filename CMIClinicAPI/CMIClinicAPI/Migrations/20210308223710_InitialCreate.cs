@@ -8,6 +8,21 @@ namespace CMIClinicAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "MedicalClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ClaimDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    PolicyNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    LimitUsed = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicalClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Persons",
                 columns: table => new
                 {
@@ -59,6 +74,32 @@ namespace CMIClinicAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Policies",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    PolicyNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    InsuranceAmount = table.Column<int>(type: "INTEGER", nullable: false),
+                    Premium = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    PersonId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RiskId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Policies", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Policies_Persons_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SubRisks",
                 columns: table => new
                 {
@@ -79,6 +120,11 @@ namespace CMIClinicAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Policies_PersonId",
+                table: "Policies",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SubRisks_RiskId",
                 table: "SubRisks",
                 column: "RiskId");
@@ -87,13 +133,19 @@ namespace CMIClinicAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Persons");
+                name: "MedicalClaims");
+
+            migrationBuilder.DropTable(
+                name: "Policies");
 
             migrationBuilder.DropTable(
                 name: "SubRisks");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Persons");
 
             migrationBuilder.DropTable(
                 name: "Risks");

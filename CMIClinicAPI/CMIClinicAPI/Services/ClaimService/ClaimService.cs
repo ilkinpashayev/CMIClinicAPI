@@ -20,6 +20,78 @@ namespace CMIClinicAPI.Services.ClaimService
             _context = context;
             _mapper = mapper;
         }
+
+        public async Task<ServiceResponse<List<GetMedicalClaimDto>>> AddMedicalClaim(AddMedicalClaimDto medicalClaim)
+        {
+            ServiceResponse<List<GetMedicalClaimDto>> serviceResponse = new ServiceResponse<List<GetMedicalClaimDto>>();
+            ServiceResponse<GetRiskDto> riskServiceResponse = new ServiceResponse<GetRiskDto>();
+
+
+            var limit = GetRisk(medicalClaim.PolicyNumber);
+            
+            if (medicalClaim.LimitUsed <= limit.Limit)
+            {
+                MedicalClaim medical = _mapper.Map<MedicalClaim>(medicalClaim);
+                await _context.MedicalClaims.AddAsync(medical);
+                await _context.SaveChangesAsync();
+
+                try
+                {
+                    Risk Risk = await _context.Risks.FirstOrDefaultAsync(c => c.Id == limit.RiskId);
+                    Risk.AlgorithType = Risk.AlgorithType;
+                    Risk.Limit = limit.Limit - medicalClaim.LimitUsed;
+                    Risk.RiskTitle = Risk.RiskTitle;
+                    Risk.SubRisks = Risk.SubRisks;
+                    _context.Risks.Update(Risk);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return serviceResponse;
+
+                serviceResponse.Data = (_context.MedicalClaims.Select(c => _mapper.Map<GetMedicalClaimDto>(c))).ToList();
+            }
+            else
+            {
+                serviceResponse.Data = null;
+                serviceResponse.Success = false;
+                serviceResponse.Message = "No sufficiant limit ";
+            }
+            return serviceResponse;
+        }
+
+        private RiskDataDto GetRisk(string PolicyNumber)
+        {
+            RiskDataDto limit = null;
+
+            var query =
+                from p in _context.Policies
+                join r in _context.Risks
+                on p.RiskId equals r.Id
+                join sr in _context.SubRisks
+                on r.Id equals sr.RiskId
+                where p.Status == StatusEnum.Issued
+                && p.PolicyNumber == PolicyNumber 
+                select new RiskDataDto
+                {
+                    Limit= r.Limit,
+                    RiskId = r.Id
+                };
+
+            try
+            {
+                var risklimit = query.ToList();
+                limit = risklimit[0];
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return limit;
+        }
         public async Task<ServiceResponse<GetClaimSearchDto>> SearchPerson(string PIN)
         {
             ServiceResponse<GetClaimSearchDto> serviceReponse = new ServiceResponse<GetClaimSearchDto>();

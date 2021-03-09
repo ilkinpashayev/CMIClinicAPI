@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMIClinicAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210308151206_InitialCreate")]
+    [Migration("20210308223710_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,26 @@ namespace CMIClinicAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.3");
+
+            modelBuilder.Entity("CMIClinicAPI.Models.MedicalClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ClaimDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LimitUsed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PolicyNumber")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalClaims");
+                });
 
             modelBuilder.Entity("CMIClinicAPI.Models.Person", b =>
                 {
@@ -45,6 +65,43 @@ namespace CMIClinicAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Persons");
+                });
+
+            modelBuilder.Entity("CMIClinicAPI.Models.Policy", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InsuranceAmount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PolicyNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Premium")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RiskId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Policies");
                 });
 
             modelBuilder.Entity("CMIClinicAPI.Models.Risk", b =>
@@ -115,6 +172,15 @@ namespace CMIClinicAPI.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("CMIClinicAPI.Models.Policy", b =>
+                {
+                    b.HasOne("CMIClinicAPI.Models.Person", null)
+                        .WithMany("Policies")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CMIClinicAPI.Models.SubRisk", b =>
                 {
                     b.HasOne("CMIClinicAPI.Models.Risk", "Risk")
@@ -124,6 +190,11 @@ namespace CMIClinicAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Risk");
+                });
+
+            modelBuilder.Entity("CMIClinicAPI.Models.Person", b =>
+                {
+                    b.Navigation("Policies");
                 });
 
             modelBuilder.Entity("CMIClinicAPI.Models.Risk", b =>

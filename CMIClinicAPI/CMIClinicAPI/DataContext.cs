@@ -20,6 +20,7 @@ namespace CMIClinicAPI
         public DbSet<Risk> Risks { get; set; }
         public DbSet<SubRisk> SubRisks { get; set; }
         public DbSet<Policy> Policies { get; set; }
+        public DbSet<MedicalClaim> MedicalClaims{ get; set; }
 
     }
 }

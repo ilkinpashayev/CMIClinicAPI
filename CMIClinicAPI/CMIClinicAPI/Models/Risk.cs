@@ -12,8 +12,6 @@ namespace CMIClinicAPI.Models
         public int Limit { get; set; }
         public Algorithm AlgorithType { get; set; }
         public List<SubRisk> SubRisks { get; set; }
-        public List<Policy> Policies { get; set; }
-
 
     }
 }

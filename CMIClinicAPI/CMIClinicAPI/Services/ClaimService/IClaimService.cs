@@ -9,6 +9,8 @@ namespace CMIClinicAPI.Services.ClaimService
     public interface IClaimService
     {
         Task<ServiceResponse<GetClaimSearchDto>> SearchPerson(string PIN);
+        Task<ServiceResponse<List<GetMedicalClaimDto>>> AddMedicalClaim(AddMedicalClaimDto medicalClaim);
+
 
     }
 }
