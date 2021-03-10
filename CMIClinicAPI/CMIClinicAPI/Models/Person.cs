@@ -13,8 +13,9 @@ namespace CMIClinicAPI.Models
         public string LastName { get; set; } 
         public string IdSeries { get; set; } 
         public string IdNumber { get; set; } 
-        public string PIN { get; set; } 
-        public List<Policy> Policies { get; set; }
+        public string PIN { get; set; }
+        public virtual ICollection<Policy> Policies { get; set; } = new HashSet<Policy>();
+
 
     }
 }

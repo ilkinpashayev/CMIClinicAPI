@@ -11,7 +11,10 @@ namespace CMIClinicAPI.Models
         public string RiskTitle { get; set; }
         public int Limit { get; set; }
         public Algorithm AlgorithType { get; set; }
-        public List<SubRisk> SubRisks { get; set; }
+        //public List<SubRisk> SubRisks { get; set; }
+
+        public virtual ICollection<Policy> Policies { get; set; } = new HashSet<Policy>();
+        public virtual ICollection<SubRisk> SubRisks { get; set; } = new HashSet<SubRisk>();
 
     }
 }

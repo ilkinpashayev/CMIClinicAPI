@@ -17,6 +17,8 @@ namespace CMIClinicAPI.Models
         public int PersonId { get; set; }
         public int RiskId { get; set; }
 
+        public virtual Risk Risk { get; set; }
+        public virtual Person Person { get; set; } 
 
 
 

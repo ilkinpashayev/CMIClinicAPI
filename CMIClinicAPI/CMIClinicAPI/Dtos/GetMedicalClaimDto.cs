@@ -9,7 +9,7 @@ namespace CMIClinicAPI.Dtos
     {
         public int Id { get; set; }
         public DateTime ClaimDate { get; set; }
-        public int PolicyNumber { get; set; }
+        public string PolicyNumber { get; set; }
         public string SubRiskId { get; set; }
 
         public int LimitUsed { get; set; }

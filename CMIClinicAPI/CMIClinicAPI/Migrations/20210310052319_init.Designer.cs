@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMIClinicAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210309161235_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210310052319_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,6 +101,8 @@ namespace CMIClinicAPI.Migrations
 
                     b.HasIndex("PersonId");
 
+                    b.HasIndex("RiskId");
+
                     b.ToTable("Policies");
                 });
 
@@ -174,11 +176,21 @@ namespace CMIClinicAPI.Migrations
 
             modelBuilder.Entity("CMIClinicAPI.Models.Policy", b =>
                 {
-                    b.HasOne("CMIClinicAPI.Models.Person", null)
+                    b.HasOne("CMIClinicAPI.Models.Person", "Person")
                         .WithMany("Policies")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CMIClinicAPI.Models.Risk", "Risk")
+                        .WithMany("Policies")
+                        .HasForeignKey("RiskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Risk");
                 });
 
             modelBuilder.Entity("CMIClinicAPI.Models.SubRisk", b =>
@@ -199,6 +211,8 @@ namespace CMIClinicAPI.Migrations
 
             modelBuilder.Entity("CMIClinicAPI.Models.Risk", b =>
                 {
+                    b.Navigation("Policies");
+
                     b.Navigation("SubRisks");
                 });
 #pragma warning restore 612, 618

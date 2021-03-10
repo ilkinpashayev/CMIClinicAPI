@@ -26,7 +26,8 @@ namespace CMIClinicAPI.Controllers
             return Ok(await _policyService.GetPolicy(PolicyNumber));
         }
         [HttpPost]
-        public async Task<IActionResult> AddPolicy(AddPolicyDto policy)
+        //[Route("policy")]
+        public async Task<IActionResult> Post(AddPolicyDto policy) 
         {
             return Ok(await _policyService.AddPolicy(policy));
         }

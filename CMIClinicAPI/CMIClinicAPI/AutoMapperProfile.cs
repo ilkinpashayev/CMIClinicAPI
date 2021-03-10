@@ -27,6 +27,7 @@ namespace CMIClinicAPI
 
             CreateMap<ClaimPerson, GetClaimSearchDto>();
             CreateMap<AddMedicalClaimDto, MedicalClaim>();
+            CreateMap<MedicalClaim, GetMedicalClaimDto>();
 
         }
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CMIClinicAPI.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,6 +97,12 @@ namespace CMIClinicAPI.Migrations
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Policies_Risks_RiskId",
+                        column: x => x.RiskId,
+                        principalTable: "Risks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,6 +129,11 @@ namespace CMIClinicAPI.Migrations
                 name: "IX_Policies_PersonId",
                 table: "Policies",
                 column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Policies_RiskId",
+                table: "Policies",
+                column: "RiskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubRisks_RiskId",
