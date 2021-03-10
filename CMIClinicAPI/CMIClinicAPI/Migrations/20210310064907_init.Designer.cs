@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMIClinicAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210310052319_init")]
+    [Migration("20210310064907_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
