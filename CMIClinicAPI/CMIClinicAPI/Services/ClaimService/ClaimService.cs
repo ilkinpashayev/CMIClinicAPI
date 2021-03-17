@@ -72,6 +72,7 @@ namespace CMIClinicAPI.Services.ClaimService
         }
         public async Task<ServiceResponse<GetClaimSearchDto>> SearchPerson(string PIN)
         {
+            var tt = "";
             ServiceResponse<GetClaimSearchDto> serviceReponse = new ServiceResponse<GetClaimSearchDto>();
             var query = 
                 from p in _context.Policies
