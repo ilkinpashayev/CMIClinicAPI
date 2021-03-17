@@ -1699,26 +1699,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bill\\.nuget\\packages\\": {},
-    "F:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\i.pashayev\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\projects\\c#\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI.csproj",
+      "projectUniqueName": "E:\\ilkin\\projects\\code\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI.csproj",
       "projectName": "CMIClinicAPI",
-      "projectPath": "F:\\projects\\c#\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI.csproj",
-      "packagesPath": "C:\\Users\\Bill\\.nuget\\packages\\",
-      "outputPath": "F:\\projects\\c#\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\obj\\",
+      "projectPath": "E:\\ilkin\\projects\\code\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI.csproj",
+      "packagesPath": "C:\\Users\\i.pashayev\\.nuget\\packages\\",
+      "outputPath": "E:\\ilkin\\projects\\code\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\CMIClinicAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "F:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "F:\\projects\\c#\\NuGet.Config",
-        "C:\\Users\\Bill\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\i.pashayev\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -1800,7 +1799,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
